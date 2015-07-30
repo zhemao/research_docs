@@ -142,7 +142,12 @@ to make, which is to change the path through which responses are sent to the CPU
 Currently, the responses always come from the data array. However, to support
 uncached accesses, we need a way for the responses to come directly from the
 MSHRs. One way to do this is to have a response queue and have an arbiter
-between the queue and the data array.
+between the queue and the data array. This is the modification that will likely
+be the most problematic. Since this stage is also in the hit path, we do not
+want to increase its latency, as that will affect performance. Furthermore,
+the timing for reading data out of the data array and sending it to the CPU
+is synchronous, so putting an arbiter in the way might introduce control issues
+that will be difficult to debug.
 
 ## AXI4
 
