@@ -34,6 +34,12 @@ tuple be an option.
         ("csr", Some(site(MMIOBase)), 4096), // 12-bit CSR space
         ("test", None, 16)) // test peripheral
 
+There will probably need to be further additional options for the NASTI-related
+modules in the junctions module. For instance, the width of the address field
+should be different for different slave interfaces, so we will need to do
+some sort of name-based secondary lookup similar to what we currently do for
+cache parameters.
+
 ## Bypassing L1 Cache
 
 Modifying the L1 cache to allow memory requests to bypass the cache will be
